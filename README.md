@@ -1,117 +1,302 @@
 # 🌱 PankhAssist: Smart NGO Volunteer & Inquiry AI Agent
 
-[![Python](https://img.shields.io/badge/Python-3.9%2B-blue.svg)](https://www.python.org/)
-[![Framework](https://img.shields.io/badge/GenAI_SDK-Google_Gemini-orange.svg)](https://ai.google.dev/)
-[![UI](https://img.shields.io/badge/UI-Streamlit-FF4B4B.svg)](https://streamlit.io/)
-[![License](https://img.shields.io/badge/Status-Production__Ready-green.svg)]()
-
-> **Live Demo:** [Click Here to View the Live Agent](https://your-app-name.streamlit.app) *(Replace with your actual Streamlit link)*
+🎨 **Live Demo:** [PankhAssist App](https://your-app-name.streamlit.app)  
+🛠️ **Source Code:** [GitHub Repository](https://github.com/shravani22patil/nayepankh-ai-agent)
 
 ---
 
 ## 📋 Project Overview
 
-Non-Profit Organizations (NGOs) like **NayePankh Foundation** operate at the intersection of high public engagement and lean operational teams. They frequently handle a massive influx of repetitive inquiries from potential student volunteers, donors, and partners. Delayed response times can result in lost advocacy and dropped engagement.
+Non-Profit Organizations (NGOs) such as **NayePankh Foundation** often manage a large volume of repetitive inquiries from student volunteers, donors, and community partners while operating with limited administrative resources.
 
-**PankhAssist** is an intelligent, single-agent conversational workflow designed to act as an automated digital helpdesk. It natively manages context, answers institutional questions based on system-level core values, maintains chat persistence, and dynamically triggers database registration hooks when volunteer intent is recognized.
+**PankhAssist** is an intelligent AI-powered volunteer assistance agent designed to automate volunteer onboarding inquiries, answer organization-related questions, maintain conversation context, and register volunteer information through structured tool calling.
 
-### Key Objectives Achieved:
-*   **Minimized Operational Overhead:** Automates the top-of-funnel volunteer screening and Q&A process.
-*   **Deterministic Execution via Tool Use:** Uses function calling rather than unreliable regex parsing to capture structured user information.
-*   **Accessible Engineering:** Built cleanly to demonstrate that high-impact AI tools can be lightweight, maintainable, and cost-efficient.
+The system functions as a digital helpdesk that reduces manual effort while delivering a smooth and personalized user experience.
 
 ---
 
-## 🏗️ System Architecture & Data Flow
+## 🎯 Key Objectives
 
-The architecture focuses on a single-agent state machine that evaluates natural language intent against programmatic tool parameters before executing functions.
+✅ **Reduce Operational Overhead**  
+Automates volunteer screening and frequently asked questions.
 
-[ User Input Text ]
-│
-▼
-[ Streamlit Session State ] <─── (Appends conversation memory context)
-│
-▼
-[ Gemini 2.5 Flash Model ] 🪐 <── (Guided by explicit System Instructions)
-│
-┌────┴────────────────────────┐
-▼                             ▼
-[Intent: Casual/NGO Q&A]    [Intent: Explicit Volunteer Registration]
-│                             │
-▼                             ▼
-Generates Contextual Text   Extracts: {name, email, interest_area}
-│
-▼
-[ register_volunteer() Function ] ⚙️
-│
-▼
-Simulates Database/CRM Entry via Mock API
+✅ **Structured Data Collection**  
+Uses AI-powered function calling to capture volunteer information accurately.
+
+✅ **Context-Aware Conversations**  
+Maintains conversational memory throughout the session.
+
+✅ **Lightweight & Cost-Efficient**  
+Built with minimal infrastructure while delivering practical impact.
 
 ---
 
-## ✨ Features Breakdown
+## ✨ Features
 
-### 1. Persistent Context Management (Memory)
-Unlike standard stateless LLM completions, the agent leverages Streamlit's `session_state` to dynamically append the entire conversational array (`user` and `model` turns) into the payload. This allows the model to remember a user’s name or chosen interest area even if specified three sentences prior.
+### 🧠 Persistent Context Management
 
-### 2. Intelligent Tool Calling (Function Calling)
-Rather than relying on the model to merely say *"I have written down your details,"* this agent implements **Function Calling**. The model intelligently realizes when it has gathered sufficient arguments (`name`, `email`, `interest_area`) and safely drops out of "text generation mode" to execute a programmatic backend task.
+Unlike traditional stateless chatbots, PankhAssist maintains conversation history using Streamlit session state.
 
-### 3. Graceful Server Exception Handling
-To ensure enterprise-grade stability, the generation engine is wrapped in proactive `try-except` blocks. If Google's free-tier servers experience localized demand spikes (e.g., HTTP 503 errors), the app catches the exception gracefully, rendering an elegant user-facing message instead of breaking the UI with a raw Python stack trace.
+This enables the AI agent to:
 
----
-
-## 🛠️ Tech Stack & Dependencies
-
-*   **Language:** Python 3.9+
-*   **Core AI SDK:** `google-genai` (The newest native Google GenAI implementation framework)
-*   **Foundation Model:** `gemini-2.5-flash` (Optimized for low-latency token generation and accurate tool execution)
-*   **Frontend UI:** `Streamlit` (Selected for fast prototyping, lightweight state management, and clear scannability)
+- Remember user details across messages
+- Maintain context during long conversations
+- Deliver more natural interactions
 
 ---
 
-## 🚀 Local Installation & Deployment
+### 🔧 Intelligent Tool Calling
 
-### 1. Clone the Repository
+The AI agent goes beyond simple text generation by leveraging function calling.
+
+When a user expresses volunteering interest, the model:
+
+1. Collects required details
+2. Validates available information
+3. Triggers backend functions automatically
+
+Required volunteer information:
+
+- Name
+- Email Address
+- Interest Area
+
+This ensures structured and reliable data collection.
+
+---
+
+### 🛡️ Graceful Error Handling
+
+The application includes exception management to ensure stability.
+
+If external AI services encounter temporary issues (e.g., HTTP 503 errors), the system:
+
+- Prevents application crashes
+- Displays user-friendly messages
+- Maintains a smooth user experience
+
+---
+
+## 🛠️ Tech Stack
+
+| Category | Technology |
+|-----------|------------|
+| Language | Python 3.9+ |
+| AI SDK | Google GenAI (`google-genai`) |
+| Foundation Model | Gemini 2.5 Flash |
+| Frontend | Streamlit |
+| State Management | Streamlit Session State |
+| Function Calling | Gemini Tool Calling |
+
+---
+
+## 📂 Project Structure
+
+```text
+PankhAssist/
+│
+├── app.py
+├── requirements.txt
+├── README.md
+│
+├── assets/
+│   └── images
+│
+└── utils/
+    └── volunteer_registration.py
+```
+
+---
+
+## 🚀 Local Setup
+
+### 1️⃣ Clone the Repository
+
 ```bash
-git clone [https://github.com/your-username/nayepankh-ai-volunteer-agent.git](https://github.com/your-username/nayepankh-ai-volunteer-agent.git)
+git clone https://github.com/shravani22patil/nayepankh-ai-volunteer-agent.git
+
 cd nayepankh-ai-volunteer-agent
+```
 
-2. Configure Environment & Install Dependencies
-It is recommended to run this within a clean virtual environment:
+---
 
-Bash
+### 2️⃣ Create a Virtual Environment (Recommended)
+
+#### Windows
+
+```bash
+python -m venv .venv
+
+.venv\Scripts\activate
+```
+
+#### macOS/Linux
+
+```bash
+python3 -m venv .venv
+
+source .venv/bin/activate
+```
+
+---
+
+### 3️⃣ Install Dependencies
+
+```bash
 pip install -r requirements.txt
-3. Set Up Your API Credentials
-Acquire a developer API key from Google AI Studio. Set it in your local environment variables:
+```
 
-Windows (Command Prompt): set GEMINI_API_KEY="your_api_key_here"
+---
 
-Windows (PowerShell): $env:GEMINI_API_KEY="your_api_key_here"
+### 4️⃣ Configure Gemini API Key
 
-Mac/Linux: export GEMINI_API_KEY="your_api_key_here"
+Obtain your API key from **Google AI Studio**.
 
-4. Execute the Application
-Bash
+#### Windows Command Prompt
+
+```cmd
+set GEMINI_API_KEY=your_api_key_here
+```
+
+#### Windows PowerShell
+
+```powershell
+$env:GEMINI_API_KEY="your_api_key_here"
+```
+
+#### macOS/Linux
+
+```bash
+export GEMINI_API_KEY="your_api_key_here"
+```
+
+---
+
+### 5️⃣ Run the Application
+
+```bash
 streamlit run app.py
+```
 
-### 🔮 Future Scalability Roadmap
-If scaled into an enterprise-level organizational utility, the architecture is designed to support the following enhancements:
+The application will launch in your browser at:
 
-Retrieval-Augmented Generation (RAG): Connecting the agent to a Vector Database (like ChromaDB or Pinecone) containing complete NGO training manuals, compliance documents, and localized guidelines to expand the agent's knowledge baseline dynamically.
+```text
+http://localhost:8501
+```
 
-Multi-Agent Orchestration: Upgrading the workflow to a multi-agent cooperative framework (e.g., using CrewAI or LangGraph) where specialized agents are spun up explicitly for Donor Management, Social Media Content Drafting, and Public Grievance Redressal.
+---
 
-True Webhook Integration: Replacing the simulated mock function with live HTTP requests targeting a CRM platform (like HubSpot, Salesforce, or Google Sheets API).
+## 🔄 Workflow
 
-### 👤 Developer Profile & Contact
-Role: AI Agent Developer Intern
+```mermaid
+flowchart TD
 
-Focus Domains: Generative AI Workflows, Retrieval-Augmented Generation (RAG), Agentic Automation Systems.
+A[User Starts Chat] --> B[Gemini Agent]
 
-GitHub: @your-profile
+B --> C{Volunteer Interest Detected?}
 
-LinkedIn: Your Name
+C -- No --> D[Answer NGO Queries]
 
-Developed with care to support the mission of youth empowerment and social development at NayePankh Foundation.
+C -- Yes --> E[Collect Name Email Interest]
+
+E --> F[Trigger Registration Tool]
+
+F --> G[Store Volunteer Details]
+
+G --> H[Confirmation Message]
+```
+
+---
+
+## 🔮 Future Enhancements
+
+### 📚 Retrieval-Augmented Generation (RAG)
+
+Integrate vector databases such as:
+
+- ChromaDB
+- Pinecone
+- Weaviate
+
+This would allow the assistant to retrieve information from:
+
+- NGO training manuals
+- Volunteer guidelines
+- Policy documents
+- FAQs
+
+---
+
+### 🤖 Multi-Agent Architecture
+
+Expand into a collaborative multi-agent system using:
+
+- CrewAI
+- LangGraph
+
+Potential specialized agents:
+
+- Volunteer Coordinator Agent
+- Donor Support Agent
+- Social Media Content Agent
+- Public Grievance Agent
+
+---
+
+### 🔗 Real CRM Integration
+
+Replace mock registration functions with live integrations:
+
+- Google Sheets API
+- Airtable
+- Salesforce
+- Custom CRM Platforms
+
+---
+
+## 📈 Potential Impact
+
+PankhAssist demonstrates how AI agents can:
+
+- Improve NGO operational efficiency
+- Reduce administrative workload
+- Increase volunteer engagement
+- Provide 24/7 support
+- Scale community outreach programs
+
+---
+
+## 👩‍💻 Developer
+
+**Role:** AI Agent Developer Intern
+
+**Focus Areas**
+
+- Generative AI
+- Agentic AI Systems
+- Retrieval-Augmented Generation (RAG)
+- LLM Applications
+- AI Automation Workflows
+
+### Connect
+
+- GitHub: https://github.com/your-profile
+- LinkedIn: https://linkedin.com/in/your-profile
+
+---
+
+## 📜 License
+
+This project is intended for educational, research, and social impact purposes.
+
+Feel free to fork, modify, and extend the project while providing appropriate attribution.
+
+---
+
+## ❤️ Acknowledgements
+
+Special thanks to **NayePankh Foundation** for inspiring this project and for its continued efforts toward youth empowerment, education, and social development.
+
+---
+
+> Built with AI to support meaningful social impact.
