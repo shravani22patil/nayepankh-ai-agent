@@ -1,6 +1,6 @@
 # 🌱 PankhAssist: Smart NGO Volunteer & Inquiry AI Agent
 
-🎨 **Live Demo:** [PankhAssist App](https://your-app-name.streamlit.app)  
+🎨 **Live Demo:** [PankhAssist App]((https://nayepankh-ai-agent-sh5eydx2uwdspdfvc2lwnd.streamlit.app/))  
 🛠️ **Source Code:** [GitHub Repository](https://github.com/shravani22patil/nayepankh-ai-agent)
 
 ---
