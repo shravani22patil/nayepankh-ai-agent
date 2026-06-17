@@ -280,8 +280,8 @@ PankhAssist demonstrates how AI agents can:
 
 ### Connect
 
-- GitHub: https://github.com/your-profile
-- LinkedIn: https://linkedin.com/in/your-profile
+- GitHub: https://github.com/shravani22patil
+- LinkedIn: https://linkedin.com/in/shravani-patil-38791b286/
 
 ---
 
