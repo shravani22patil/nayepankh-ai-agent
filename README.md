@@ -113,9 +113,9 @@ PankhAssist/
 ### 1️⃣ Clone the Repository
 
 ```bash
-git clone https://github.com/shravani22patil/nayepankh-ai-volunteer-agent.git
+git clone https://github.com/shravani22patil/nayepankh-ai-agent.git
 
-cd nayepankh-ai-volunteer-agent
+cd nayepankh-ai-agent
 ```
 
 ---
